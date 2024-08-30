@@ -1,0 +1,30 @@
+/* LoginForm.css */
+
+.login-form-container {
+  background-color: #35424a; /* Set your desired background color */
+  padding: 20px;
+  border-radius: 10px;
+}
+
+/* App.css */
+
+.container {
+  background-color: #000080; /* Set your desired background color */
+  padding: 20px;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  position: relative;
+  font-size: 0.7rem;
+  padding: 10px;
+}

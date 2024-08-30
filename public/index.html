@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MP4 Video Preview</title>
+  <!-- Link to Material-UI CSS -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+  <!-- Link to your custom CSS file (if needed) -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <div id="root"></div>
+
+  <!-- React scripts -->
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+  <script>
+    // Get the filename of the video from the query parameter
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const filename = urlParams.get('filename');
+
+    // Render the video preview HTML only when the user is logged in
+    const isLoggedIn = localStorage.getItem('token') !== null;
+
+    if (isLoggedIn) {
+      // Create a Material-UI container component
+      const Container = MaterialUI.Container;
+      // Create a Material-UI Typography component
+      const Typography = MaterialUI.Typography;
+      // Create a Material-UI Video component
+      const Video = MaterialUI.Video;
+
+      // Create a root React component
+      const App = () => (
+        <Container maxWidth="md" sx={{ backgroundColor: '#f0f0f0', padding: '2rem' }}>
+          <Typography variant="h3">MP4 Video Preview</Typography>
+          <Video controls autoplay>
+            <source src={`http://localhost:5000/download?filename=${filename}`} type="video/mp4" />
+            Your browser does not support the video tag.
+          </Video>
+        </Container>
+      );
+
+      // Render the root component
+      ReactDOM.createRoot(document.getElementById('root')).render(
+        <React.StrictMode>
+          <App />
+        </React.StrictMode>
+      );
+
+      // Play the video when the page loads
+      window.onload = function () {
+        const video = document.querySelector('video');
+        video.addEventListener('click', function () {
+          video.play();
+        });
+      };
+    }
+  </script>
+</body>
+
+</html>
